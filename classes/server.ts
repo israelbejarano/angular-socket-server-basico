@@ -34,6 +34,9 @@ export default class Server {
 
             // desconectar
             socket.desconectar(cliente);
+
+            // configurar usuario
+            socket.configurarUsuario(cliente, this.io);
         });
     }
 
