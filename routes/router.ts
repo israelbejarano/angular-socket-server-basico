@@ -8,7 +8,7 @@ import { Mapa } from '../classes/mapa';
 const router = Router();
 const grafica = new GraficaData();
 const encuesta = new EncuestaData();
-const mapa = new Mapa();
+export const mapa = new Mapa();
 const lugares = [
     {
       id: '1',

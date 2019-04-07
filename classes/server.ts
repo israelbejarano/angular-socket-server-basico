@@ -29,6 +29,9 @@ export default class Server {
         this.io.on('connection', cliente => {
             console.log('nuevo cliente conectado => ' + cliente.id);
             
+            // mapas
+            socket.nuevoMarcador(cliente);
+
             // conectar cliente
             socket.conectarCliente(cliente, this.io);
             
@@ -43,6 +46,7 @@ export default class Server {
 
             // desconectar
             socket.desconectar(cliente, this.io);
+
 
         });
     }
