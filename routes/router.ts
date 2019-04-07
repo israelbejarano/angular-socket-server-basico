@@ -1,8 +1,10 @@
 import {Router, Request, Response} from 'express';
 import Server from '../classes/server';
 import { usuariosConectados } from '../sockets/socket';
+import { GraficaData } from '../classes/grafica';
 
 const router = Router();
+const grafica = new GraficaData();
 
 router.get('/mensajes', (req: Request, res: Response) => {
     res.json({
@@ -73,6 +75,23 @@ router.get('/usuarios/detalle', (req: Request, res: Response) => {
         ok: true,
         clientes: usuariosConectados.getLista()
     });
+});
+
+// obtener grafica
+router.get('/grafica', (req: Request, res: Response) => {
+    res.json(grafica.getDataGrafica());
+});
+
+// modificar valores de la grafica
+router.post('/grafica', (req: Request, res: Response) => {
+    const mes = req.body.mes;
+    const unidades = Number(req.body.unidades);
+
+    grafica.incrementarValor(mes, unidades)
+
+    //const server = Server.instance
+    //server.io.emit('mensaje-nuevo');
+    res.json(grafica.getDataGrafica());
 });
 
 export default router; 

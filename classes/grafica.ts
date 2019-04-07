@@ -13,7 +13,7 @@ export class GraficaData {
     incrementarValor(mes: string, valor: number) {
         mes = mes.toLowerCase().trim();
         for(let i in this.meses) {
-            if (this.meses[i] === i) {
+            if (this.meses[i] === mes) {
                 this.valores[i] += valor;
             }
         }
