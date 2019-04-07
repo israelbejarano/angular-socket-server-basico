@@ -3,10 +3,38 @@ import Server from '../classes/server';
 import { usuariosConectados } from '../sockets/socket';
 import { GraficaData } from '../classes/grafica';
 import { EncuestaData} from '../classes/encuesta';
+import { Mapa } from '../classes/mapa';
 
 const router = Router();
 const grafica = new GraficaData();
 const encuesta = new EncuestaData();
+const mapa = new Mapa();
+const lugares = [
+    {
+      id: '1',
+      nombre: 'Udemy',
+      lat: 37.784679,
+      lng: -122.395936
+    },
+    {
+      id: '2',
+      nombre: 'Bahía de San Francisco',
+      lat: 37.798933,
+      lng: -122.377732
+    },
+    {
+      id: '3',
+      nombre: 'The Palace Hotel',
+      lat: 37.788578,
+      lng: -122.401745
+    }
+];
+mapa.marcadores.push(... lugares);
+
+router.get('/mapa', (req: Request, res: Response) => {
+    res.json(mapa.getMarcadores());
+});
+
 
 router.get('/mensajes', (req: Request, res: Response) => {
     res.json({
