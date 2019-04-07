@@ -2,9 +2,11 @@ import {Router, Request, Response} from 'express';
 import Server from '../classes/server';
 import { usuariosConectados } from '../sockets/socket';
 import { GraficaData } from '../classes/grafica';
+import { EncuestaData} from '../classes/encuesta';
 
 const router = Router();
 const grafica = new GraficaData();
+const encuesta = new EncuestaData();
 
 router.get('/mensajes', (req: Request, res: Response) => {
     res.json({
@@ -92,6 +94,23 @@ router.post('/grafica', (req: Request, res: Response) => {
     const server = Server.instance
     server.io.emit('cambio-grafica', grafica.getDataGrafica());
     res.json(grafica.getDataGrafica());
+});
+
+// obtener encuesta
+router.get('/encuesta', (req: Request, res: Response) => {
+    res.json(encuesta.getDataEncuesta());
+});
+
+// modificar valores de la encuesta
+router.post('/encuesta', (req: Request, res: Response) => {
+    const opcion = Number(req.body.opcion);
+    const unidades = Number(req.body.unidades);
+
+    encuesta.incrementarValor(opcion, unidades)
+
+    const server = Server.instance
+    server.io.emit('cambio-encuesta', encuesta.getDataEncuesta());
+    res.json(encuesta.getDataEncuesta());
 });
 
 export default router; 
