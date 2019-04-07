@@ -1,7 +1,7 @@
 import { Marcador } from "./marcador";
 
 export class Mapa {
-    private marcadores: Marcador[] = [];
+    public marcadores: Marcador[] = [];
     constructor() {}
     getMarcadores() {
         return this.marcadores;
