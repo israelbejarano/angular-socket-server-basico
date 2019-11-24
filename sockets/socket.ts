@@ -1,10 +1,13 @@
 import { Socket } from 'socket.io';
 import socketIO from 'socket.io';
 import { UsuariosLista } from '../classes/usuarios-lista';
+import { MarcadorMapbox } from '../classes/marcadorMapbox';
+import { MapaMapbox } from '../classes/mapaMapbox';
 import { Usuario } from '../classes/usuario';
 import { mapa } from '../routes/router';
 
 export const usuariosConectados = new UsuariosLista();
+export const mapaMapbox = new MapaMapbox();
 
 // conectar cliente
 export const conectarCliente = (cliente: Socket, io: socketIO.Server) => {
@@ -71,5 +74,12 @@ export const moverMarcador = (cliente: Socket) => {
         console.log(marcador);
         mapa.moverMarcador(marcador);
         cliente.broadcast.emit('mover-marcador', marcador);
+    });
+}
+
+// mapbox mapas
+export const mapboxMapasSockets = (cliente: Socket, io: socketIO.Server) => {
+    cliente.on('mb-marcador-nuevo', (marcador: MarcadorMapbox) => {
+        mapaMapbox.agregarMarcador(marcador);
     });
 }

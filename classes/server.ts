@@ -34,6 +34,9 @@ export default class Server {
             socket.borrarMarcador(cliente);
             socket.moverMarcador(cliente);
 
+            // mapbox mapas
+            socket.mapboxMapasSockets(cliente, this.io);
+
             // conectar cliente
             socket.conectarCliente(cliente, this.io);
             

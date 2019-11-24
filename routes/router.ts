@@ -1,16 +1,13 @@
 import {Router, Request, Response} from 'express';
 import Server from '../classes/server';
-import { usuariosConectados } from '../sockets/socket';
+import { usuariosConectados, mapaMapbox } from '../sockets/socket';
 import { GraficaData } from '../classes/grafica';
 import { EncuestaData} from '../classes/encuesta';
 import { Mapa } from '../classes/mapa';
-import { MapaMapbox } from '../classes/mapaMapbox';
 
 const router = Router();
 
 // Parte de mapas con Mapbox
-
-const mapaMapbox = new MapaMapbox
 router.get('/mapbox/mapa', (req: Request, res: Response) => {
     res.json(mapaMapbox.getMarcadores());
 });
