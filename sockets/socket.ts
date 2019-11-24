@@ -88,4 +88,9 @@ export const mapboxMapasSockets = (cliente: Socket, io: socketIO.Server) => {
         mapaMapbox.borrarMarcador(id);
         cliente.broadcast.emit('mb-marcador-borrar', id);
     });
+
+    cliente.on('mb-marcador-mover', (marcador: MarcadorMapbox) => {
+        mapaMapbox.moverMarcador(marcador);
+        cliente.broadcast.emit('mb-marcador-mover', marcador);
+    });
 }
