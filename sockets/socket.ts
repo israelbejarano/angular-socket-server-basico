@@ -81,5 +81,6 @@ export const moverMarcador = (cliente: Socket) => {
 export const mapboxMapasSockets = (cliente: Socket, io: socketIO.Server) => {
     cliente.on('mb-marcador-nuevo', (marcador: MarcadorMapbox) => {
         mapaMapbox.agregarMarcador(marcador);
+        cliente.broadcast.emit('mb-marcador-nuevo', marcador);
     });
 }
