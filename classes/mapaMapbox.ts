@@ -41,4 +41,8 @@ export class MapaMapbox {
         this.marcadores[marcador.id].lng = marcador.lng;
         this.marcadores[marcador.id].lat = marcador.lat;
     }
+    
+    agregarMarcador(marcador: MarcadorMapbox) {
+      this.marcadores[marcador.id] = marcador;
+    }
 }
